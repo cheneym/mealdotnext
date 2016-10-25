@@ -4,6 +4,7 @@ const app = express();
 
 require('./config/connection.js');
 require('./config/middleware.js')(app, express);
+require('./config/auth.js')(app);
 require('./config/routes.js')(app, express);
 
 app.listen(3000, () => {

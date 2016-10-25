@@ -21,9 +21,15 @@ module.exports = {
         if (user) {
           res.status(404).end('User already exists');
         } else {
-          User.create({ username, password })
+          new User({ username, password })
+            .save()
             .then((newUser) => {
-              res.json(newUser.id);
+              console.log(newUser);
+              res.json(newUser);
+              // req.logIn(newUser, (err) => {
+              //   if (err) { return err; }
+              //   return res.redirect('/');
+              // });
             });
         }
       });
