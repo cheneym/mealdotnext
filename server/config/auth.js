@@ -32,13 +32,10 @@ module.exports = (app) => {
           const salt = user.salt;
           const encryptedpw = user.password;
           if (bcrypt.hashSync(password, salt) === encryptedpw) {
-            console.log('hello1');
             return done(null, user);
           }
-          console.log('hello2');
           return done(null, false, { message: 'Incorrect username or password' });
         }
-        console.log('hello3');
         return done(null, false, { message: 'Incorrect username or password' });
       });
   };
@@ -46,8 +43,8 @@ module.exports = (app) => {
   module.exports.passport = passport.use(new LocalStrategy(validateUserPass));
 };
 
-module.exports.loggedIn = (req, res, next) => {
-  if (req.user) {
+module.exports.isloggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
     next();
   } else {
     res.redirect('/login');

@@ -1,10 +1,10 @@
 const recipeRouter = require('./routers/recipe.js');
 const userRouter = require('./routers/user.js');
 const clientRouter = require('./routers/client.js');
-const passport = require('./auth.js').passport;
+const isLoggedIn = require('./auth.js').isloggedIn;
 
 module.exports = (app) => {
-  app.use('/api/recipe', passport.authenticate('local'), recipeRouter);
-  app.use('/api/user', passport.authenticate('local'), userRouter);
+  app.use('/api/recipe', isLoggedIn, recipeRouter);
+  app.use('/api/user', isLoggedIn, userRouter);
   app.use('/', clientRouter);
 };
